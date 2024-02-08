@@ -1,12 +1,12 @@
 import React from 'react';
-import ListComponent from '../../../components/ListComponent';
+import ListComponent from './ListComponent';
 
-import './layout.scss';
+const LayoutComponent = () => {
 
-const LayoutComponent = (props) => {
+
 	return (
 		<div className="main">
-			<h1>List </h1>
+			<h1>  <ListComponent /></h1>
 		</div>
 	);
 };
