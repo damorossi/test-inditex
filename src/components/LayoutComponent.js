@@ -1,14 +1,14 @@
 import React from 'react';
 import ListComponent from './ListComponent';
 
-const LayoutComponent = () => {
+import './layout.scss';
 
-
-	return (
-		<div className="main">
-			<h1>  <ListComponent /></h1>
-		</div>
-	);
-};
+function LayoutComponent() {
+  return (
+    <div className="main">
+      <ListComponent />
+    </div>
+  );
+}
 
 export default LayoutComponent;
