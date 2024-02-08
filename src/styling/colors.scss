@@ -1,0 +1,25 @@
+$_white: #fff;
+$_light-grey1: #e5e5e5;
+$_light-grey2: #dce0db;
+$_light-grey3: #9b9b9b;
+$_mid-grey: #ccc;
+$_dark-grey: #4a4a4a;
+
+$_light-blue: #3498db;
+$_black: #000;
+$_green: #7f9f21;
+// bg colors:
+$bg-common-widget: $_white;
+$bg-layout: $_light-grey1;
+$bg-button: $_light-grey2;
+$bg-toggle-off: $_mid-grey;
+$bg-toggle-on: $_green;
+$bg-full-dark: $_black;
+// texts
+$text-common: $_black;
+$text-titles: $_light-grey3;
+$text-paragraph: $_dark-grey;
+// borders:
+$border-inputs: $_black;
+$border-preload: $_light-grey2;
+$border-preload2: $_light-blue;
