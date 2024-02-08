@@ -20,43 +20,6 @@
 		width: 540px;
 	}
 
-	&-itemContainer {
-		@include widget-common-elements();
-		@include common-shadows();
-		display: flex;
-		flex-direction: column;
-		height: auto;
-		margin: 5px;
-		padding: 13px;
-		width: 120px;
-	}
-
-	&-itemHeader {
-		align-items: center;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-	}
-
-	&-imageContainer {
-		@include common-shadows;
-		margin: 0;
-		width: 100%;
-
-		>img {
-			width: 100%;
-			height: 100%;
-		}
-	}
-
-	&-name {
-		color: $text-titles;
-		font-size: 18px;
-		font-weight: 400;
-		margin-top: 2px;
-		margin-bottom: 5px;
-		text-transform: uppercase;
-	}
 
 	&-itemContent {
 		align-items: flex-start;
