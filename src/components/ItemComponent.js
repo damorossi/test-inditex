@@ -4,7 +4,7 @@ import './item.scss';
 
 function ItemComponent({ name, price }) {
   return (
-    <div className="product-itemContainer">
+    <div className="product-itemContainer" draggable>
       <div className="product-itemHeader">
         <h3 className="product-name">
           {name}
@@ -24,8 +24,10 @@ function ItemComponent({ name, price }) {
     </div>
   );
 }
+
 ItemComponent.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired
 };
+
 export default ItemComponent;

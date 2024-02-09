@@ -6,12 +6,21 @@ function ListComponent() {
   const [products, setProducts] = useState([]);
 
   const handleItemsOrder = items => {
-    // TODO: create an array with an inner array of 3 items each
-    // let tempAr = [];
+    // const qty = Math.ceil(items.length / 3);
+    let rows = [];
+    let row = [];
 
-    // items.forEach((item, index) => {
-    //   tempAr = index % 3 === 0 ? [] : [...tempAr, item];
-    // });
+    for (let i = 0; i < items.length; i += 1) {
+      if (i % 3 === 0 && i > 1) {
+        rows = [...rows, row];
+        row = [];
+      }
+      row = [...row, items[i]];
+
+      if (i + 1 === items.length) {
+        rows = [...rows, row];
+      }
+    }
 
     setProducts(items);
   };
