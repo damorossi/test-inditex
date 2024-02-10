@@ -3,6 +3,9 @@ module.exports = {
   overrides: [
     {
       files: ['*.js'],
+      plugins: [
+        'react'
+      ],
       extends: ['airbnb'],
       rules: {
         'linebreak-style': 'off',

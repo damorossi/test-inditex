@@ -37,8 +37,6 @@ function ItemComponent({
       <div className="product-itemHeader">
         <h3 className="product-name">
           {name}
-          -
-          {id}
         </h3>
         <figure className="product-imageContainer">
           <img src="assets/images/default.jpg" title={name} alt={name} />

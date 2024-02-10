@@ -1,34 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { DndContext, closestCenter } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SortableContext } from '@dnd-kit/sortable';
 import ItemComponent from './ItemComponent';
-
 import './list.scss';
 
 function ListComponent() {
   const [products, setProducts] = useState([]);
 
   const handleItemsOrder = items => {
+    if (!items) {
+      return;
+    }
     const prods = items.map((item, index) => ({
       ...item, position: index
     }));
 
-    let rows = [];
+    const rows = [];
     let row = [];
 
-    for (let i = 0; i < prods.length; i += 1) {
-      if (i % 3 === 0 && i > 1) {
-        rows = [...rows, row];
+    prods.forEach((item, index) => {
+      row.push(item);
+      if (row.length === 3 || index === items.length - 1) {
+        rows.push(row);
         row = [];
       }
-      row = [...row, prods[i]];
-
-      if (i + 1 === prods.length) {
-        rows = [...rows, row];
-      }
-    }
-
-    setProducts(prods);
+    });
+    setProducts(rows);
   };
 
   useEffect(() => {
@@ -49,10 +46,9 @@ function ListComponent() {
         if (product.position >= oldIndex && product.position <= newIndex) {
           product.position -= 1;
         }
-      } else
-        if (product.position <= oldIndex && product.position >= newIndex) {
-          product.position += 1;
-        }
+      } else if (product.position <= oldIndex && product.position >= newIndex) {
+        product.position += 1;
+      }
 
       return product;
     });
@@ -86,17 +82,24 @@ function ListComponent() {
           >
             <SortableContext
               items={products}
-              strategy={verticalListSortingStrategy}
+
             >
               {
-                products.map(({ name, price, id }, index) => (
-                  <ItemComponent
-                    key={`${name}-${id}`}
-                    name={name}
-                    id={id}
-                    price={price}
-                    position={index}
-                  />
+                // products.map(({name, price, id}, index) => (
+                products.map(row => (
+                  <div className="products-row">
+                    {
+                      row.map(({ name, price, id }, index) => (
+                        <ItemComponent
+                          key={`${name}-${id}`}
+                          name={name}
+                          id={id}
+                          price={price}
+                          position={index}
+                        />
+                      ))
+                    }
+                  </div>
                 ))
               }
             </SortableContext>
