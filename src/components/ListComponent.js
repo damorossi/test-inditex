@@ -37,12 +37,8 @@ function ListComponent() {
       .then(data => handleItemsOrder(data));
   }, []);
 
-  const onHandleDragEnd = event => {
-    const { active, over } = event;
-    const oldIndex = products.findIndex(item => item.id === active.id);
-    const newIndex = products.findIndex(item => item.id === over.id);
-
-    const ordered = products.map(item => {
+  const rearangeProds = (prods, oldIndex, newIndex) => {
+    const ordered = prods.map(item => {
       const product = { ...item };
       if (product.position === oldIndex) {
         product.position = newIndex;
@@ -58,9 +54,16 @@ function ListComponent() {
           product.position += 1;
         }
 
-      console.log(product.position);
       return product;
     });
+    return ordered;
+  };
+
+  const onHandleDragEnd = event => {
+    const { active, over } = event;
+    const oldIndex = products.findIndex(item => item.id === active.id);
+    const newIndex = products.findIndex(item => item.id === over.id);
+    const ordered = rearangeProds(products, oldIndex, newIndex);
     const sortedProducts = ordered.sort(
       (p1, p2) => (
         // eslint-disable-next-line no-nested-ternary
@@ -68,6 +71,7 @@ function ListComponent() {
           : (p1.position < p2.position) ? -1
             : 0)
     );
+
     handleItemsOrder(sortedProducts);
   };
 
