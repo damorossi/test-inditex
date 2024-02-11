@@ -2,5 +2,20 @@
 @import './../styling/colors';
 
 .main {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
 	padding: 16px;
+}
+
+
+.control {
+	&-container {
+		align-self: flex-end;
+	}
+
+	&-aligners {
+		display: flex;
+
+	}
 }

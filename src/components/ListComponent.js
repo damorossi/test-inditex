@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import ItemComponent from './ItemComponent';
 
 import './list.scss';
 
-function ListComponent() {
+function ListComponent({ position }) {
   const [products, setProducts] = useState([]);
 
   const handleItemsOrder = items => {
@@ -38,6 +39,7 @@ function ListComponent() {
   }, []);
 
   const rearangeProds = (prods, oldIndex, newIndex) => {
+    console.log(' a evr si algo pasa', position);
     const ordered = prods.map(item => {
       const product = { ...item };
       if (product.position === oldIndex) {
@@ -77,35 +79,35 @@ function ListComponent() {
 
   return (
     <section className="products-container">
-      <div className="products-items">
-        {
-          // products.map(({ name, price }) => (
-          <DndContext
-            collisionDetection={closestCenter}
-            onDragEnd={onHandleDragEnd}
+      <div className="products-items" style={{ justifyContent: position }}>
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={onHandleDragEnd}
+        >
+          <SortableContext
+            items={products}
+            strategy={verticalListSortingStrategy}
           >
-            <SortableContext
-              items={products}
-              strategy={verticalListSortingStrategy}
-            >
-              {
-                products.map(({ name, price, id }, index) => (
-                  <ItemComponent
-                    key={`${name}-${id}`}
-                    name={name}
-                    id={id}
-                    price={price}
-                    position={index}
-                  />
-                ))
-              }
-            </SortableContext>
-          </DndContext>
 
-        }
+            {
+              products.map(({ name, price, id }, index) => (
+                <ItemComponent
+                  key={`${name}-${id}`}
+                  name={name}
+                  id={id}
+                  price={price}
+                  position={index}
+                />
+              ))
+            }
+          </SortableContext>
+        </DndContext>
       </div>
     </section>
   );
 }
+ListComponent.propTypes = {
+  position: PropTypes.string.isRequired,
+};
 
 export default ListComponent;
