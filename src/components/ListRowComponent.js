@@ -1,64 +1,71 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSortable } from '@dnd-kit/sortable';
+import { useSortable, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import ItemComponent from './ItemComponent';
 import './list-row.scss';
-
-function ListRowComponent({ items, id, pos }) {
+function ListRowComponent({ id, items, pos, onHandleDragEnd }) {
   const {
     attributes,
     listeners,
     setNodeRef,
     transform,
-    transition
+    transition,
   } = useSortable({
-    id
+    id,
   });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
     border: 'solid',
-    cursor: 'pointer',
-    order: pos
+    cursor: 'grab',
+    order: pos,
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-      className="products-row"
+    <SortableContext
+      items={items.map((prod) => prod.id)}
+      strategy={verticalListSortingStrategy}
     >
-      {
-        items.map((prod, index) => (
-          <div className="products-items" key={prod.id}>
+      <div
+        ref={setNodeRef}
+        style={style}
+        {...attributes}
+        {...listeners}
+        className="products-row"
+      >
+        {items.map((prod, index) => (
+          <div
+            className="products-items"
+            key={prod.id}
+            role="button"
+          >
             <ItemComponent
-              key={`${prod.name}-${prod.id}`}
-              name={prod.name}
               id={prod.id}
+              name={prod.name}
               price={prod.price}
               position={index}
             />
           </div>
-        ))
-      }
-    </div>
+        ))}
+      </div>
+    </SortableContext>
   );
 }
 
 ListRowComponent.propTypes = {
   id: PropTypes.string.isRequired,
-  items: PropTypes.PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    position: PropTypes.number.isRequired,
-    id: PropTypes.string.isRequired
-  })).isRequired,
-  pos: PropTypes.string.isRequired
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      position: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
+    })
+  ),
+  pos: PropTypes.number.isRequired,
+  onHandleDragEnd: PropTypes.func.isRequired,
 };
 
 export default ListRowComponent;

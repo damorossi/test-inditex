@@ -1,4 +1,4 @@
-module.exports = {
+/*module.exports = {
   root: true,
   overrides: [
     {
@@ -60,3 +60,4 @@ module.exports = {
     },
   ],
 };
+ */
