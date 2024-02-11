@@ -1,11 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 // import ItemComponent from './ItemComponent';
-import './list.scss';
 import ListRowComponent from './ListRowComponent';
+import './list.scss';
 
 function ListComponent() {
   const [products, setProducts] = useState([]);
@@ -17,22 +17,11 @@ function ListComponent() {
     const prods = items.map((item, index) => ({
       ...item, position: index
     }));
-
-    const rows = [];
-    let row = [];
-
-    prods.forEach((item, index) => {
-      row.push(item);
-      if (row.length === 3 || index === items.length - 1) {
-        rows.push(row);
-        row = [];
-      }
-    });
-    setProducts(rows);
+    setProducts(prods);
   };
 
   useEffect(() => {
-    fetch('http://localhost:4001/products')
+    fetch('http://localhost:4001/userRows')
       .then(response => response.json())
       .then(data => handleItemsOrder(data));
   }, []);
@@ -59,6 +48,9 @@ function ListComponent() {
   };
 
   const onHandleDragEnd = event => {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    console.log(event);
     const { active, over } = event;
     const oldIndex = products.findIndex(item => item.id === active.id);
     const newIndex = products.findIndex(item => item.id === over.id);
@@ -76,7 +68,7 @@ function ListComponent() {
 
   return (
     <section className="products-container">
-      <div className="products-items">
+      <div className="products-rows">
         {
           // products.map(({ name, price }) => (
           <DndContext
@@ -88,43 +80,12 @@ function ListComponent() {
               strategy={verticalListSortingStrategy}
             >
               {
-                // products.map(({name, price, id}, index) => (
-                products.map((row, pos) => {
-                  const {
-                    attributes,
-                    listeners,
-                    setNodeRef,
-                    transform,
-                    transition
-                  } = useSortable({
-                    id: row
-                  });
-
-                  const style = {
-                    transform: CSS.Transform.toString(transform),
-                    transition,
-                    border: 'solid',
-                    cursor: 'pointer',
-                    order: pos
-                  };
-
-                  return (
-                    <div
-                      ref={setNodeRef}
-                      style={style}
-                      {...attributes}
-                      {...listeners}
-                      className="products-row"
-                    >
-                      <ListRowComponent row={row} />
-                    </div>
-                  );
-                })
+                products.map((row, pos) => (
+                  <ListRowComponent items={row.items} id={row.id} pos={pos} key={row.id} />
+                ))
               }
-
             </SortableContext>
           </DndContext>
-
         }
       </div>
     </section>

@@ -10,13 +10,20 @@
 		width: 100%;
 	}
 
-	&-items {
+	&-items,
+	&-rows {
 		border: solid;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		padding: 0;
+		width: 130px;
+	}
+
+	&-rows {
+		display: flex;
+		flex-direction: column;
 		width: 540px;
 	}
 

@@ -1,0 +1,10 @@
+@import './../styling/mixins';
+@import './../styling/colors';
+
+.products {
+	&-row {
+		background-color: grey;
+		display: flex;
+		flex-direction: row;
+	}
+}
