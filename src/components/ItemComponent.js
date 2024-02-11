@@ -32,7 +32,7 @@ function ItemComponent({
       style={style}
       {...attributes}
       {...listeners}
-      className="product-itemContainer"
+      className="product-listRow"
     >
       <div className="product-itemHeader">
         <h3 className="product-name">

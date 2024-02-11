@@ -1,8 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
 import { DndContext, closestCenter } from '@dnd-kit/core';
-import { SortableContext } from '@dnd-kit/sortable';
-import ItemComponent from './ItemComponent';
+import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+// import ItemComponent from './ItemComponent';
 import './list.scss';
+import ListRowComponent from './ListRowComponent';
 
 function ListComponent() {
   const [products, setProducts] = useState([]);
@@ -82,26 +85,43 @@ function ListComponent() {
           >
             <SortableContext
               items={products}
-
+              strategy={verticalListSortingStrategy}
             >
               {
                 // products.map(({name, price, id}, index) => (
-                products.map(row => (
-                  <div className="products-row">
-                    {
-                      row.map(({ name, price, id }, index) => (
-                        <ItemComponent
-                          key={`${name}-${id}`}
-                          name={name}
-                          id={id}
-                          price={price}
-                          position={index}
-                        />
-                      ))
-                    }
-                  </div>
-                ))
+                products.map((row, pos) => {
+                  const {
+                    attributes,
+                    listeners,
+                    setNodeRef,
+                    transform,
+                    transition
+                  } = useSortable({
+                    id: row
+                  });
+
+                  const style = {
+                    transform: CSS.Transform.toString(transform),
+                    transition,
+                    border: 'solid',
+                    cursor: 'pointer',
+                    order: pos
+                  };
+
+                  return (
+                    <div
+                      ref={setNodeRef}
+                      style={style}
+                      {...attributes}
+                      {...listeners}
+                      className="products-row"
+                    >
+                      <ListRowComponent row={row} />
+                    </div>
+                  );
+                })
               }
+
             </SortableContext>
           </DndContext>
 
