@@ -65,82 +65,95 @@
   "userRows": [
     {
       "id": 1,
+      "pos": 0,
       "items": [
         {
           "id": 101,
           "name": "Product A",
           "photo": "photo_url_A.jpg",
-          "price": 19.99
+          "price": 19.99,
+          "pos": 0
         },
         {
           "id": 102,
           "name": "Product B",
           "photo": "photo_url_B.jpg",
-          "price": 29.99
+          "price": 29.99,
+          "pos": 1
         },
         {
-          "product": 101,
           "id": 103,
           "name": "Product C",
           "photo": "photo_url_C.jpg",
-          "price": 39.99
+          "price": 39.99,
+          "pos": 2
         },
         {
           "id": 104,
           "name": "Product D",
           "photo": "photo_url_D.jpg",
-          "price": 49.99
+          "price": 49.99,
+          "pos": 3
         }
       ]
     },
     {
       "id": 2,
+      "pos": 1,
       "items": [
         {
           "id": 105,
           "name": "Product E",
           "photo": "photo_url_E.jpg",
-          "price": 59.99
+          "price": 59.99,
+          "pos": 0
         },
         {
           "id": 106,
           "name": "Product F",
           "photo": "photo_url_F.jpg",
-          "price": 69.99
+          "price": 69.99,
+          "pos": 1
         }
       ]
     },
     {
       "id": 3,
+      "pos": 2,
       "items": [
         {
           "id": 107,
           "name": "Product G",
           "photo": "photo_url_G.jpg",
-          "price": 79.99
+          "price": 79.99,
+          "pos": 0
         },
         {
           "id": 108,
           "name": "Product H",
           "photo": "photo_url_H.jpg",
-          "price": 89.99
+          "price": 89.99,
+          "pos": 1
         },
         {
           "id": 109,
           "name": "Product I",
           "photo": "photo_url_I.jpg",
-          "price": 99.99
+          "price": 99.99,
+          "pos": 2
         }
       ]
     },
     {
       "id": 4,
+      "pos": 3,
       "items": [
         {
           "id": 110,
           "name": "Product J",
           "photo": "photo_url_J.jpg",
-          "price": 109.99
+          "price": 109.99,
+          "pos": 0
         }
       ]
     }

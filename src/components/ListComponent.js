@@ -9,6 +9,7 @@ function ListComponent({
   onItemDragStart,
   onItemDragOver,
   onItemDrop,
+  swapRows
 }) {
   return (
     <div>
@@ -22,6 +23,7 @@ function ListComponent({
           onItemDragStart={onItemDragStart}
           onItemDragOver={onItemDragOver}
           onItemDrop={onItemDrop}
+          swapRows={swapRows}
         />
       ))}
     </div>

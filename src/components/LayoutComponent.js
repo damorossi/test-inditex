@@ -4,27 +4,16 @@ import ListComponent from './ListComponent';
 
 function LayoutComponent() {
   const [rows, setRows] = useState([]);
+  const [selectedRowItem, setRowItem] = useState(-1);
 
-  const orderRows = data => {
-    setRows(prevRows => {
-      const items = data.map((row, index) => ({ ...row, pos: index }));
-      return items;
-    });
-  };
-  // const orderRows = data => {
-  //   const items = data.map((row, index) => ({ ...row, pos: index }));
-  //   setRows(items);
-  // };
   useEffect(() => {
     fetch('http://localhost:4001/userRows')
       .then(response => response.json())
-      .then(data => orderRows(data));
+      .then(data => setRows(data));
   }, []);
-
 
   const handleRowDragStart = (e, rowPos) => {
     console.log('handleRowDragStart rowPos:', rowPos); // Add this line
-
     e.dataTransfer.setData('text/plain', rowPos);
   };
 
@@ -32,30 +21,21 @@ function LayoutComponent() {
     e.preventDefault();
   };
 
-  // const handleRowDrop = (e, targetRowPos) => {
-  //   e.preventDefault();
-  //   const draggedRowPos = parseInt(e.dataTransfer.getData('text/plain'), 10);
-
-  //   if (draggedRowPos !== targetRowPos) {
-  //     const updatedRows = [...rows];
-  //     const draggedRow = updatedRows[draggedRowPos];
-  //     updatedRows.splice(draggedRowPos, 1);
-  //     updatedRows.splice(targetRowPos, 0, draggedRow);
-
-  //     setRows(updatedRows.map((row, index) => ({ ...row, pos: index })));
-  //   }
-  // };
-
   const handleItemDragStart = (e, rowPos, itemIndex) => {
+    setRowItem(itemIndex);
     e.stopPropagation(); // Stop event propagation to prevent row drag
     e.dataTransfer.setData('text/plain', JSON.stringify({ rowPos, itemIndex }));
   };
 
   const handleItemDragOver = (e) => {
+    e.stopPropagation();
     e.preventDefault();
   };
 
   const handleItemDrop = (e, targetRowPos, targetItemIndex) => {
+    if (selectedRowItem < 0) {
+      return;
+    }
     e.preventDefault();
     console.log("handleItemDrop called");
     const { rowPos, itemIndex } = JSON.parse(e.dataTransfer.getData('text/plain'));
@@ -75,10 +55,31 @@ function LayoutComponent() {
       setRows(updatedRows);
       console.log('updated rows', rows);
       e.stopPropagation();
+    } else {
+      const updatedRows = [...rows];
+      const originalRow = updatedRows[rowPos];
+      const targetRow = updatedRows[targetRowPos];
+      const draggedItem = originalRow.items[itemIndex];
+
+      // Remove item from original position
+      originalRow.items.splice(itemIndex, 1);
+
+      // Insert item at new position
+      targetRow.items.splice(targetItemIndex, 0, draggedItem);
+
+      setRows(updatedRows);
+      console.log('updated rows', rows);
+      e.stopPropagation();
     }
+    setRowItem(-1);
   };
 
   const handleRowDrop = (e, targetRowPos) => {
+    if (selectedRowItem >= 0) {
+      handleItemDrop(e, targetRowPos, selectedRowItem);
+      return;
+    }
+    e.stopPropagation();
     e.preventDefault();
     console.log('handleRowDrop called');
 
