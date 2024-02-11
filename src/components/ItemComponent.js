@@ -1,38 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import './item.scss';
 
-function ItemComponent({
-  id, name, price,
-}) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable({
-    id,
-  });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    border: '1px solid #ddd',
-    padding: '5px',
-    cursor: 'grab',
-  };
-
+function ItemComponent({ name, price }) {
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-      className="product-listRow"
-    >
+    <div className="product-listRow">
       <div className="product-itemHeader">
         <h3 className="product-name">{name}</h3>
         <figure className="product-imageContainer">
@@ -49,10 +21,9 @@ function ItemComponent({
 }
 
 ItemComponent.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  // Remove the position prop from propTypes
+  // Remove 'position' from prop types
 };
 
 export default ItemComponent;

@@ -1,71 +1,41 @@
+{/* <div style={{ display: 'flex', flexDirection: 'row' }}> */ }
+// ListRowComponent.js
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useSortable, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import ItemComponent from './ItemComponent';
-import './list-row.scss';
-function ListRowComponent({ id, items, pos, onHandleDragEnd }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable({
-    id,
-  });
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    border: 'solid',
-    cursor: 'grab',
-    order: pos,
-  };
-
+function ListRowComponent({
+  row,
+  onRowDragStart,
+  onRowDragOver,
+  onRowDrop,
+  onItemDragStart,
+  onItemDragOver,
+  onItemDrop,
+}) {
   return (
-    <SortableContext
-      items={items.map((prod) => prod.id)}
-      strategy={verticalListSortingStrategy}
+    <div
+      draggable
+      onDragStart={(e) => onRowDragStart(e, row.pos)}
+      onDragOver={(e) => onRowDragOver(e)}
+      onDrop={(e) => onRowDrop(e, row.pos)}
+      style={{ margin: '10px', border: '1px solid #ddd', padding: '10px' }}
     >
-      <div
-        ref={setNodeRef}
-        style={style}
-        {...attributes}
-        {...listeners}
-        className="products-row"
-      >
-        {items.map((prod, index) => (
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+        {row.items?.map((item, index) => (
           <div
-            className="products-items"
-            key={prod.id}
-            role="button"
+            key={item.id}
+            draggable
+            onDragStart={(e) => onItemDragStart(e, item.id, row.pos, index)}
+            onDragOver={(e) => onItemDragOver(e)}
+            onDrop={(e) => onItemDrop(e, row.pos, index)}
+            style={{ border: '1px solid #ccc', padding: '5px', marginBottom: '5px' }}
           >
-            <ItemComponent
-              id={prod.id}
-              name={prod.name}
-              price={prod.price}
-              position={index}
-            />
+            <ItemComponent name={item.name} price={item.price} />
           </div>
         ))}
       </div>
-    </SortableContext>
+    </div>
   );
 }
-
-ListRowComponent.propTypes = {
-  id: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      position: PropTypes.number.isRequired,
-      id: PropTypes.string.isRequired,
-    })
-  ),
-  pos: PropTypes.number.isRequired,
-  onHandleDragEnd: PropTypes.func.isRequired,
-};
 
 export default ListRowComponent;
