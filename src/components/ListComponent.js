@@ -14,7 +14,7 @@ function ListComponent({
     <div>
       {rows.map((row) => (
         <ListRowComponent
-          key={row.id}
+          key={`${row.id}-${row.pos}`}
           row={row}
           onRowDragStart={onRowDragStart}
           onRowDragOver={onRowDragOver}
