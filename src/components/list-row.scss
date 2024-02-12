@@ -4,12 +4,14 @@
 .row {
 	&-container {
 		background-color: grey;
+		border: solid 1px;
 		display: flex;
 		flex-direction: row;
 		margin: '10px';
 		border: '1px solid #ddd';
 		padding: '10px';
 		position: relative;
+		width: 100%;
 	}
 
 	&-controllers {

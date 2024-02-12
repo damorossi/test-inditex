@@ -25,6 +25,8 @@ function ListRowComponent({
       onDrop={(e) => onRowDrop(e, row.pos)}
       style={{}}
       className="row-container"
+      data-testid={`row-${row.id}`}
+      role="row-container"
     >
       <div style={{ display: 'flex', flexDirection: 'row', float: row.align }} >
         <div className="row-controllers">
@@ -42,6 +44,7 @@ function ListRowComponent({
             onDragOver={(e) => onItemDragOver(e)}
             onDrop={(e) => onItemDrop(e, row.pos, index)}
             style={{ border: '1px solid #ccc', padding: '5px', margin: '5px' }}
+            data-testid={`item-${row.id}`}
           >
             <ItemComponent name={item?.name} price={item?.price} />
           </div>
