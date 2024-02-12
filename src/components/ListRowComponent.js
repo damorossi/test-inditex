@@ -11,6 +11,7 @@ function ListRowComponent({
   onItemDragStart,
   onItemDragOver,
   onItemDrop,
+  position
 }) {
   return (
     <div
@@ -20,8 +21,7 @@ function ListRowComponent({
       onDrop={(e) => onRowDrop(e, row.pos)}
       style={{ margin: '10px', border: '1px solid #ddd', padding: '10px' }}
     >
-      <h3>{`Row ${row.id}`}</h3>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: position }}>
         {row.items?.map((item, index) => (
           <div
             key={item.id}

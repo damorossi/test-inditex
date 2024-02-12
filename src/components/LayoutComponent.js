@@ -5,6 +5,7 @@ import ListRowComponent from './ListRowComponent';
 function LayoutComponent() {
   const [rows, setRows] = useState([]);
   const [selectedRowItem, setRowItem] = useState(-1);
+  const [position, setPosition] = useState('flex-end');
 
   useEffect(() => {
     fetch('http://localhost:4001/userRows')
@@ -78,8 +79,20 @@ function LayoutComponent() {
     }
   };
 
+  const handleAlignment = pos => {
+    setPosition(pos.target.id);
+  };
+
+
   return (
     <>
+      <div className="control-container">
+        <div className="control-aligners">
+          <button type="button" id="flex-start" onClick={handleAlignment}>|-</button>
+          <button type="button" id="center" onClick={handleAlignment}>-|-</button>
+          <button type="button" id="flex-end" onClick={handleAlignment}>-|</button>
+        </div>
+      </div>
       {
         rows.map((row) => (
           <ListRowComponent
@@ -91,6 +104,7 @@ function LayoutComponent() {
             onItemDragStart={handleItemDragStart}
             onItemDragOver={handleItemDragOver}
             onItemDrop={handleItemDrop}
+            position={position}
           />
         ))
       }
