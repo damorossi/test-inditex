@@ -80,7 +80,7 @@
           "name": "Product B",
           "photo": "photo_url_B.jpg",
           "price": 29.99,
-          "pos": 1,
+          "pos": 1
         },
         {
           "id": 103,
@@ -101,7 +101,7 @@
     {
       "id": 2,
       "pos": 1,
-      "align": "left",
+      "align": "right",
       "items": [
         {
           "id": 105,

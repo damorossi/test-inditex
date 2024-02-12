@@ -1,6 +1,7 @@
 // LayoutComponent.js
 import React, { useState, useEffect } from 'react';
 import ListRowComponent from './ListRowComponent';
+import './layout.scss';
 
 function LayoutComponent() {
   const [rows, setRows] = useState([]);
@@ -55,9 +56,8 @@ function LayoutComponent() {
       }
       targetRow.items.splice(targetItemIndex, 0, originalRow.items.splice(itemIndex, 1)[0]);
     }
-
     setRows(updatedRows);
-    setRowItem(-1); // Reset selected item
+    setRowItem(-1);
   };
 
   const handleRowDrop = (e, targetRowPos) => {

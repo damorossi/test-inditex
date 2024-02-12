@@ -9,7 +9,7 @@ function ListRowComponent({
   onItemDragStart,
   onItemDragOver,
   onItemDrop,
-  position
+
 }) {
   return (
     <div
@@ -17,9 +17,10 @@ function ListRowComponent({
       onDragStart={(e) => onRowDragStart(e, row.pos)}
       onDragOver={(e) => onRowDragOver(e)}
       onDrop={(e) => onRowDrop(e, row.pos)}
-      style={{ margin: '10px', border: '1px solid #ddd', padding: '10px' }}
+      style={{}}
+      className="row-container"
     >
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: position }}>
+      <div style={{ display: 'flex', flexDirection: 'row', float: row.align }}>
         {row.items?.map((item, index) => (
           <div
             key={item.id}
@@ -29,11 +30,11 @@ function ListRowComponent({
             onDrop={(e) => onItemDrop(e, row.pos, index)}
             style={{ border: '1px solid #ccc', padding: '5px', margin: '5px' }}
           >
-            <ItemComponent name={item.name} price={item.price} />
+            <ItemComponent name={item?.name} price={item?.price} />
           </div>
         ))}
       </div>
-    </div>
+    </div >
   );
 }
 

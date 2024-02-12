@@ -1,10 +1,13 @@
 @import './../styling/mixins';
 @import './../styling/colors';
 
-.products {
-	&-row {
+.row {
+	&-container {
 		background-color: grey;
 		display: flex;
 		flex-direction: row;
+		margin: '10px';
+		border: '1px solid #ddd';
+		padding: '10px'
 	}
 }
