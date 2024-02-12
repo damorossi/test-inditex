@@ -1,6 +1,6 @@
 // LayoutComponent.js
 import React, { useState, useEffect } from 'react';
-import ListComponent from './ListComponent';
+import ListRowComponent from './ListRowComponent';
 
 function LayoutComponent() {
   const [rows, setRows] = useState([]);
@@ -37,41 +37,26 @@ function LayoutComponent() {
       return;
     }
     e.preventDefault();
-    console.log("handleItemDrop called");
+
     const { rowPos, itemIndex } = JSON.parse(e.dataTransfer.getData('text/plain'));
 
-    if (rowPos === targetRowPos && itemIndex !== targetItemIndex) {
-      console.log("Item moved within the same row");
-      const updatedRows = [...rows];
+    const updatedRows = [...rows];
+
+    if (rowPos === targetRowPos) { // if item is in same row
       const targetRow = updatedRows[rowPos];
-      const draggedItem = targetRow.items[itemIndex];
-
-      // Remove item from original position
-      targetRow.items.splice(itemIndex, 1);
-
-      // Insert item at new position
+      const draggedItem = targetRow.items.splice(itemIndex, 1)[0]; // Combine removal and retrieval
       targetRow.items.splice(targetItemIndex, 0, draggedItem);
-
-      setRows(updatedRows);
-      console.log('updated rows', rows);
-      e.stopPropagation();
-    } else {
-      const updatedRows = [...rows];
+    } else { // Item moved to a different row
       const originalRow = updatedRows[rowPos];
       const targetRow = updatedRows[targetRowPos];
-      const draggedItem = originalRow.items[itemIndex];
-
-      // Remove item from original position
-      originalRow.items.splice(itemIndex, 1);
-
-      // Insert item at new position
-      targetRow.items.splice(targetItemIndex, 0, draggedItem);
-
-      setRows(updatedRows);
-      console.log('updated rows', rows);
-      e.stopPropagation();
+      if (targetRow.items.length >= 3) {
+        return;
+      }
+      targetRow.items.splice(targetItemIndex, 0, originalRow.items.splice(itemIndex, 1)[0]);
     }
-    setRowItem(-1);
+
+    setRows(updatedRows);
+    setRowItem(-1); // Reset selected item
   };
 
   const handleRowDrop = (e, targetRowPos) => {
@@ -79,15 +64,11 @@ function LayoutComponent() {
       handleItemDrop(e, targetRowPos, selectedRowItem);
       return;
     }
-    e.stopPropagation();
     e.preventDefault();
-    console.log('handleRowDrop called');
 
     const draggedRowPos = parseInt(e.dataTransfer.getData('text/plain'), 10);
-    console.log('draggedRowPos:', draggedRowPos, 'targetRowPos:', targetRowPos); // Add this line
 
     if (draggedRowPos !== targetRowPos) {
-      console.log("Row moved to a different position");
       const updatedRows = [...rows];
       const draggedRow = updatedRows[draggedRowPos];
       updatedRows.splice(draggedRowPos, 1);
@@ -98,15 +79,22 @@ function LayoutComponent() {
   };
 
   return (
-    <ListComponent
-      rows={rows}
-      onRowDragStart={handleRowDragStart}
-      onRowDragOver={handleRowDragOver}
-      onRowDrop={handleRowDrop}
-      onItemDragStart={handleItemDragStart}
-      onItemDragOver={handleItemDragOver}
-      onItemDrop={handleItemDrop}
-    />
+    <>
+      {
+        rows.map((row) => (
+          <ListRowComponent
+            key={`${row.id}-${row.pos}`}
+            row={row}
+            onRowDragStart={handleRowDragStart}
+            onRowDragOver={handleRowDragOver}
+            onRowDrop={handleRowDrop}
+            onItemDragStart={handleItemDragStart}
+            onItemDragOver={handleItemDragOver}
+            onItemDrop={handleItemDrop}
+          />
+        ))
+      }
+    </>
   );
 }
 
