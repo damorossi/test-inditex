@@ -25,13 +25,6 @@
           "photo": "photo_url_C.jpg",
           "price": 39.99,
           "pos": 2
-        },
-        {
-          "id": 104,
-          "name": "Product D",
-          "photo": "photo_url_D.jpg",
-          "price": 49.99,
-          "pos": 3
         }
       ]
     },
@@ -95,6 +88,13 @@
           "photo": "photo_url_J.jpg",
           "price": 109.99,
           "pos": 0
+        },
+        {
+          "id": 104,
+          "name": "Product D",
+          "photo": "photo_url_D.jpg",
+          "price": 49.99,
+          "pos": 1
         }
       ]
     }

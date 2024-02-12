@@ -31,6 +31,7 @@ function ListRowComponent({
       className={`row-container row-container--${row.align}`}
     >
       <div style={{ display: 'flex', flexDirection: 'row', float: row.align }} >
+        {/* TODO: Add styles to the buttons */}
         <div className="row-controllers">
           <div className="control-aligners">
             <button type="button" id="flex-start" onClick={() => handleAlignment('initial', row.id)}>{row.align}</button>
@@ -47,7 +48,8 @@ function ListRowComponent({
               onDragOver={(e) => onItemDragOver(e)}
               onDrop={(e) => onItemDrop(e, row.pos, index)}
               style={{ border: '1px solid #ccc', padding: '5px', margin: '5px' }}
-              data-testid={`item-${row.id}`}
+              data-testid={`item-${item.id}`}
+              role="product-item"
             >
               <ItemComponent name={item?.name} price={item?.price} />
             </div>

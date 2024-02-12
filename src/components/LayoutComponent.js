@@ -15,7 +15,6 @@ function LayoutComponent() {
   }, []);
 
   const handleRowDragStart = (e, rowPos) => {
-    console.log('handleRowDragStart rowPos:', rowPos); // Add this line
     e.dataTransfer.setData('text/plain', rowPos);
   };
 
@@ -39,6 +38,7 @@ function LayoutComponent() {
       return;
     }
     e.preventDefault();
+    e.stopPropagation();
 
     const { rowPos, itemIndex } = JSON.parse(e.dataTransfer.getData('text/plain'));
 
@@ -96,7 +96,9 @@ function LayoutComponent() {
 
   return (
     <div className="main">
-      {/* <div className="control-container">
+      { // TODO: ADD CONTROL BAR FOR ALL ITEMS
+
+      /* <div className="control-container">
         <div className="control-aligners">
           <button type="button" id="flex-start" onClick={handleAlignment}>|-</button>
           <button type="button" id="center" onClick={handleAlignment}>-|-</button>
