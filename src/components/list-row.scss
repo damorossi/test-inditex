@@ -8,6 +8,13 @@
 		flex-direction: row;
 		margin: '10px';
 		border: '1px solid #ddd';
-		padding: '10px'
+		padding: '10px';
+		position: relative;
+	}
+
+	&-controllers {
+		position: absolute;
+		left: 0px;
+		top: 0px;
 	}
 }

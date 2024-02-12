@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ItemComponent from './ItemComponent';
+
+import './list-row.scss';
 
 function ListRowComponent({
   row,
@@ -11,6 +13,10 @@ function ListRowComponent({
   onItemDrop,
 
 }) {
+  const [position, setPosition] = useState(row.pos);
+  const handleAlignment = pos => {
+    setPosition(pos.target.id);
+  };
   return (
     <div
       draggable
@@ -20,7 +26,14 @@ function ListRowComponent({
       style={{}}
       className="row-container"
     >
-      <div style={{ display: 'flex', flexDirection: 'row', float: row.align }}>
+      <div style={{ display: 'flex', flexDirection: 'row', float: row.align }} >
+        <div className="row-controllers">
+          <div className="control-aligners">
+            <button type="button" id="flex-start" onClick={handleAlignment}>|-</button>
+            <button type="button" id="center" onClick={handleAlignment}>-|-</button>
+            <button type="button" id="flex-end" onClick={handleAlignment}>-|</button>
+          </div>
+        </div>
         {row.items?.map((item, index) => (
           <div
             key={item.id}
