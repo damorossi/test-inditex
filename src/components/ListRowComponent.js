@@ -1,5 +1,3 @@
-{/* <div style={{ display: 'flex', flexDirection: 'row' }}> */ }
-// ListRowComponent.js
 import React from 'react';
 import ItemComponent from './ItemComponent';
 
@@ -29,7 +27,7 @@ function ListRowComponent({
             onDragStart={(e) => onItemDragStart(e, row.pos, index)}
             onDragOver={(e) => onItemDragOver(e)}
             onDrop={(e) => onItemDrop(e, row.pos, index)}
-            style={{ border: '1px solid #ccc', padding: '5px', marginBottom: '5px' }}
+            style={{ border: '1px solid #ccc', padding: '5px', margin: '5px' }}
           >
             <ItemComponent name={item.name} price={item.price} />
           </div>

@@ -66,6 +66,7 @@
     {
       "id": 1,
       "pos": 0,
+      "align": "left",
       "items": [
         {
           "id": 101,
@@ -79,7 +80,7 @@
           "name": "Product B",
           "photo": "photo_url_B.jpg",
           "price": 29.99,
-          "pos": 1
+          "pos": 1,
         },
         {
           "id": 103,
@@ -100,6 +101,7 @@
     {
       "id": 2,
       "pos": 1,
+      "align": "left",
       "items": [
         {
           "id": 105,
@@ -120,6 +122,7 @@
     {
       "id": 3,
       "pos": 2,
+      "align": "left",
       "items": [
         {
           "id": 107,
@@ -147,6 +150,7 @@
     {
       "id": 4,
       "pos": 3,
+      "align": "left",
       "items": [
         {
           "id": 110,

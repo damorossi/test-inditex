@@ -85,7 +85,7 @@ function LayoutComponent() {
 
 
   return (
-    <>
+    <div className="main">
       <div className="control-container">
         <div className="control-aligners">
           <button type="button" id="flex-start" onClick={handleAlignment}>|-</button>
@@ -108,7 +108,7 @@ function LayoutComponent() {
           />
         ))
       }
-    </>
+    </div>
   );
 }
 
