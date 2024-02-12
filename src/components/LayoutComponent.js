@@ -79,20 +79,30 @@ function LayoutComponent() {
     }
   };
 
-  const handleAlignment = pos => {
-    setPosition(pos.target.id);
+  const handleAlignment = (pos, rowId) => {
+    let rowData = [...rows];
+    rowData = rowData.map(x => {
+      if (rowId === undefined) {
+        x.align = pos;
+      } else if (rowId === x.id) {
+        x.align = pos
+      }
+      return x;
+    });
+
+    setRows(rowData);
   };
 
 
   return (
     <div className="main">
-      <div className="control-container">
+      {/* <div className="control-container">
         <div className="control-aligners">
           <button type="button" id="flex-start" onClick={handleAlignment}>|-</button>
           <button type="button" id="center" onClick={handleAlignment}>-|-</button>
           <button type="button" id="flex-end" onClick={handleAlignment}>-|</button>
         </div>
-      </div>
+      </div> */}
       {
         rows.map((row) => (
           <ListRowComponent
@@ -105,6 +115,7 @@ function LayoutComponent() {
             onItemDragOver={handleItemDragOver}
             onItemDrop={handleItemDrop}
             position={position}
+            onHandleAlignment={handleAlignment}
           />
         ))
       }

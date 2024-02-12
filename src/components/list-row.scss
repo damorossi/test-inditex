@@ -12,6 +12,18 @@
 		padding: '10px';
 		position: relative;
 		width: 100%;
+
+		&--initial {
+			justify-content: flex-start;
+		}
+
+		&--normal {
+			justify-content: center;
+		}
+
+		&--last {
+			justify-content: flex-end;
+		}
 	}
 
 	&-controllers {
