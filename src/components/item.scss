@@ -5,6 +5,7 @@
 	&-itemContainer {
 		@include widget-common-elements();
 		@include common-shadows();
+		background-color: $_light-blue;
 		display: flex;
 		flex-direction: column;
 		height: auto;
@@ -35,9 +36,11 @@
 		color: $text-titles;
 		font-size: 18px;
 		font-weight: 400;
+		height: 20px;
 		margin-top: 2px;
 		margin-bottom: 5px;
 		text-transform: uppercase;
+		text-overflow: ellipsis;
 	}
 
 	&-itemContent {
@@ -56,6 +59,7 @@
 	}
 
 	&-listRow {
-		max-width: 130px;
+		max-width: 80%;
+		background-color: $_light-grey2;
 	}
 }

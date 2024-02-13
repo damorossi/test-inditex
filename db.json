@@ -8,23 +8,16 @@
         {
           "id": 101,
           "name": "Product A",
-          "photo": "photo_url_A.jpg",
+          "photo": "9632041400_1_1_1.jpg",
           "price": 19.99,
           "pos": 0
         },
         {
           "id": 102,
           "name": "Product B",
-          "photo": "photo_url_B.jpg",
+          "photo": "1659740401_6_1_1.jpg",
           "price": 29.99,
           "pos": 1
-        },
-        {
-          "id": 103,
-          "name": "Product C",
-          "photo": "photo_url_C.jpg",
-          "price": 39.99,
-          "pos": 2
         }
       ]
     },
@@ -36,14 +29,14 @@
         {
           "id": 105,
           "name": "Product E",
-          "photo": "photo_url_E.jpg",
+          "photo": "6164083250_1_1_1.jpg",
           "price": 59.99,
           "pos": 0
         },
         {
           "id": 106,
           "name": "Product F",
-          "photo": "photo_url_F.jpg",
+          "photo": "1659740800_1_1_1.jpg",
           "price": 69.99,
           "pos": 1
         }
@@ -57,21 +50,21 @@
         {
           "id": 107,
           "name": "Product G",
-          "photo": "photo_url_G.jpg",
+          "photo": "1659740401_6_1_1.jpg",
           "price": 79.99,
           "pos": 0
         },
         {
           "id": 108,
           "name": "Product H",
-          "photo": "photo_url_H.jpg",
+          "photo": "5862413730_1_1_1.jpg",
           "price": 89.99,
           "pos": 1
         },
         {
           "id": 109,
           "name": "Product I",
-          "photo": "photo_url_I.jpg",
+          "photo": "8197033405_1_1_1.jpg",
           "price": 99.99,
           "pos": 2
         }
@@ -85,16 +78,16 @@
         {
           "id": 110,
           "name": "Product J",
-          "photo": "photo_url_J.jpg",
+          "photo": "0108024406_2_1_1.jpg",
           "price": 109.99,
           "pos": 0
         },
         {
-          "id": 104,
-          "name": "Product D",
-          "photo": "photo_url_D.jpg",
-          "price": 49.99,
-          "pos": 1
+          "id": 103,
+          "name": "Product C",
+          "photo": "0108024406_1_1_1.jpg",
+          "price": 39.99,
+          "pos": 2
         }
       ]
     }

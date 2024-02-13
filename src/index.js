@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import LayoutComponent from './components/LayoutComponent';
+// import LayoutComponent from './components/LayoutComponent';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import Page from './Page';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <LayoutComponent />
+    <Page />
   </React.StrictMode>
 );
 

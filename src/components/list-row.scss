@@ -14,6 +14,7 @@
 		position: relative;
 		width: 100%;
 
+
 		&--initial {
 			justify-content: flex-start;
 		}
@@ -30,13 +31,12 @@
 	&__controllers {
 		background-color: $bg-common-widget;
 		cursor: pointer;
-		left: 10px;
-		transition: all 300ms ease-out;
+		right: 0px;
+		transition: all 100ms ease-in-out;
 		position: absolute;
 		top: -10px;
 		opacity: 0.1;
 		font-size: 10px;
-
 
 		&:hover {
 			opacity: 1;

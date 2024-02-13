@@ -49,27 +49,27 @@ function ListRowComponent({
       role="row-container"
       className={`row__container row__container--${row.align}`}
     >
-      <div
+      {/* <div className="row__"
         style={{ display: 'flex', flexDirection: 'row', float: row.align }}
-      >
-        {getButtons()}
-        {
-          row.items?.map((item, index) => (
-            <div
-              key={item.id}
-              draggable
-              onDragStart={(e) => onItemDragStart(e, row.pos, index)}
-              onDragOver={(e) => onItemDragOver(e)}
-              onDrop={(e) => onItemDrop(e, row.pos, index)}
-              style={{ padding: '5px', margin: '5px' }}
-              data-testid={`item-${item.id}`}
-              role="product-item"
-            >
-              <ItemComponent name={item?.name} price={item?.price} />
-            </div>
-          ))
-        }
-      </div >
+      > */}
+      {getButtons()}
+      {
+        row.items?.map((item, index) => (
+          <div
+            key={item.id}
+            draggable
+            onDragStart={(e) => onItemDragStart(e, row.pos, index)}
+            onDragOver={(e) => onItemDragOver(e)}
+            onDrop={(e) => onItemDrop(e, row.pos, index)}
+            style={{ padding: '5px', margin: '5px', width: '30%' }}
+            data-testid={`item-${item.id}`}
+            role="product-item"
+          >
+            <ItemComponent img={item?.photo} name={item?.name} price={item?.price} />
+          </div>
+        ))
+      }
+      {/* </div > */}
     </div >
   );
 }
