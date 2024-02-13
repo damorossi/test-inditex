@@ -25,8 +25,8 @@ This will launch the application in development mode.
 
 To execute tests, use the following command:
 
-npm run test
-
+npm run test | npm run test -- --watchAll 
+ 
 To run the server emulator, use:
 
 npm run start-server
