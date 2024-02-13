@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ItemComponent from './ItemComponent';
+import ButtonsComponent from './ButtonsComponent';
 
 import './list-row.scss';
 
@@ -15,9 +16,26 @@ function ListRowComponent({
 
 }) {
 
-  const handleAlignment = (pos, id) => {
-    onHandleAlignment(pos, id);
-  };
+  const [isActionsVisible, setActionVisible] = useState(false);
+
+  const showButtons = () => {
+    setActionVisible(true)
+  }
+  const hideButttons = () => {
+
+    setActionVisible(false)
+  }
+
+  const getButtons = () => {
+    if (isActionsVisible) {
+      return (
+        <div className="row__controllers">
+          <ButtonsComponent onHandleClick={onHandleAlignment} rowId={row.id} />
+        </div>
+      );
+    }
+    return null;
+  }
 
   return (
     <div
@@ -25,20 +43,16 @@ function ListRowComponent({
       onDragStart={(e) => onRowDragStart(e, row.pos)}
       onDragOver={(e) => onRowDragOver(e)}
       onDrop={(e) => onRowDrop(e, row.pos)}
-      style={{}}
+      onMouseOver={showButtons}
+      onMouseOut={hideButttons}
       data-testid={`row-${row.id}`}
       role="row-container"
-      className={`row-container row-container--${row.align}`}
+      className={`row__container row__container--${row.align}`}
     >
-      <div style={{ display: 'flex', flexDirection: 'row', float: row.align }} >
-        {/* TODO: Add styles to the buttons */}
-        <div className="row-controllers">
-          <div className="control-aligners">
-            <button type="button" id="flex-start" onClick={() => handleAlignment('initial', row.id)}>{row.align}</button>
-            <button type="button" id="center" onClick={() => handleAlignment('normal', row.id)}>-|-</button>
-            <button type="button" id="flex-end" onClick={() => handleAlignment('last', row.id)}>-|</button>
-          </div>
-        </div>
+      <div
+        style={{ display: 'flex', flexDirection: 'row', float: row.align }}
+      >
+        {getButtons()}
         {
           row.items?.map((item, index) => (
             <div
@@ -47,7 +61,7 @@ function ListRowComponent({
               onDragStart={(e) => onItemDragStart(e, row.pos, index)}
               onDragOver={(e) => onItemDragOver(e)}
               onDrop={(e) => onItemDrop(e, row.pos, index)}
-              style={{ border: '1px solid #ccc', padding: '5px', margin: '5px' }}
+              style={{ padding: '5px', margin: '5px' }}
               data-testid={`item-${item.id}`}
               role="product-item"
             >

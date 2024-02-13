@@ -3,6 +3,7 @@
 @mixin widget-common-elements {
 	@include common-texts;
 	background-color: $bg-common-widget;
+	border: solid 1px $border-widgets;
 	border-radius: 3px;
 	margin-top: 10px;
 }

@@ -13,7 +13,7 @@
 
 	&-items,
 	&-rows {
-		border: solid;
+		@include widget-common-elements;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;

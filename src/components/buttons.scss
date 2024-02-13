@@ -1,0 +1,15 @@
+@import './../styling/mixins';
+@import './../styling/colors';
+
+.display {
+  &__alignment-button {
+    height: 100%;
+    width: 32%;
+    gap: 3px;
+    padding: 5px;
+    border-radius: 2px;
+    background-color: #dce0db;
+    transition: margin 700ms;
+    font-size: 70%;
+  }
+}
