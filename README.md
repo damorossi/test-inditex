@@ -8,6 +8,11 @@ Before you begin, ensure you have met the following requirements:
 
 - Node.js 16.x installed
 - npm package manager installed
+- if you don't have the specific version, you can download nvm from https://github.com/coreybutler/nvm-windows/releases/download/1.1.12/nvm-setup.exe
+- . nvm install 16
+- . nvm use 16
+
+
 
 ## Installation
 
